@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const express =
     require("express");
 
@@ -17,6 +15,11 @@ app.use(
     })
 );
 
+app.use((req, res, next) => {
+    console.log("--incoming request--");
+    console.log(`Method: ${req.method}, URL: ${req.url}, Body: ${JSON.stringify(req.body)}`);
+
+});
 app.use(
     "/api/titulares",
     titularesRoutes
