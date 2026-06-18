@@ -1,4 +1,4 @@
-package com.empresa.firmatitular.exception;
+package com.contratos.API.Firmas.exception;
 
 public class FirmaTitularException extends RuntimeException {
 

@@ -1,7 +1,7 @@
-package com.empresa.firmatitular.service;
+package com.contratos.API.Firmas.service;
 
-import com.empresa.firmatitular.exception.FirmaTitularException;
-import com.empresa.firmatitular.model.FotoTitularRequest;
+import com.contratos.API.Firmas.exception.FirmaTitularException;
+import com.contratos.API.Firmas.model.FotoTitularRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +35,7 @@ public class FotoTitularService {
 
     /**
      * Decodifica la imagen Base64, la guarda en la carpeta compartida
-     * (nombrada solo con el IdTitular, sobrescribiendo si ya existe) y
+     * (nombrada solo con el Nombre del Titular, sobrescribiendo si ya existe) y
      * registra la ruta resultante en la BD a traves del SP.
      *
      * @return la ruta UNC final guardada en la BD
@@ -45,7 +45,7 @@ public class FotoTitularService {
 
         byte[] bytesImagen = decodificarBase64(request.getImagenBase64());
 
-        Path rutaArchivo = guardarArchivoEnCarpeta(request.getIdTitular(), bytesImagen, request.getExtension());
+        Path rutaArchivo = guardarArchivoEnCarpeta(request.getNombreCompleto(), bytesImagen, request.getExtension());
 
         actualizarRutaEnBD(request.getIdTitular(), rutaArchivo.toString());
 
@@ -60,7 +60,7 @@ public class FotoTitularService {
 
     private byte[] decodificarBase64(String base64) {
         try {
-            // Por si el cliente manda el prefijo data:image/jpeg;base64,xxxx
+       
             String limpio = base64.contains(",") ? base64.substring(base64.indexOf(',') + 1) : base64;
             return Base64.getDecoder().decode(limpio);
         } catch (IllegalArgumentException ex) {
@@ -68,7 +68,7 @@ public class FotoTitularService {
         }
     }
 
-    private Path guardarArchivoEnCarpeta(Integer idTitular, byte[] bytesImagen, String extension) {
+    private Path guardarArchivoEnCarpeta(String nombreCompleto, byte[] bytesImagen, String extension) {
         try {
             Path carpeta = Paths.get(rutaCompartida);
 
@@ -76,8 +76,8 @@ public class FotoTitularService {
                 Files.createDirectories(carpeta);
             }
 
-            // Nombre = solo el IdTitular -> sobrescribe la foto anterior
-            String nombreArchivo = idTitular + "." + extension.toLowerCase();
+            // Nombre =nombreCompleto titular
+            String nombreArchivo = nombreCompleto + "." + extension.toLowerCase();
             Path rutaFinal = carpeta.resolve(nombreArchivo);
 
             Files.write(rutaFinal, bytesImagen);

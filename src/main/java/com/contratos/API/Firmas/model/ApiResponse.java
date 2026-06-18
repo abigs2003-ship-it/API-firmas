@@ -1,4 +1,4 @@
-package com.empresa.firmatitular.model;
+package com.contratos.API.Firmas.model;
 
 public class ApiResponse {
 

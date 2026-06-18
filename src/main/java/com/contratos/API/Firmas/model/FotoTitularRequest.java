@@ -1,4 +1,4 @@
-package com.empresa.firmatitular.model;
+package com.contratos.API.Firmas.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,8 +15,8 @@ public class FotoTitularRequest {
     @NotBlank(message = "imagenBase64 es obligatorio")
     private String imagenBase64;
 
-    // Opcional: jpg, png. Si no se manda, se asume jpg.
-    private String extension = "jpg";
+    private String extension = "png";
+    private String nombreCompleto;;
 
     public Integer getIdTitular() {
         return idTitular;
@@ -24,6 +24,14 @@ public class FotoTitularRequest {
 
     public void setIdTitular(Integer idTitular) {
         this.idTitular = idTitular;
+    }
+    
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
     public String getImagenBase64() {

@@ -1,8 +1,8 @@
-package com.empresa.firmatitular.controller;
+package com.contratos.API.Firmas.controller;
 
-import com.empresa.firmatitular.model.ApiResponse;
-import com.empresa.firmatitular.model.FotoTitularRequest;
-import com.empresa.firmatitular.service.FotoTitularService;
+import com.contratos.API.Firmas.model.ApiResponse;
+import com.contratos.API.Firmas.model.FotoTitularRequest;
+import  com.contratos.API.Firmas.service.FotoTitularService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public class FotoTitularController {
      * compartida de Windows y registra la ruta en PMT_App_Ventas_Titulares.RutaFirma
      *
      * POST /api/titulares/foto
-     * Body: { "idTitular": 1024, "imagenBase64": "...", "extension": "jpg" }
+
      */
     @PostMapping("/foto")
     public ResponseEntity<ApiResponse> guardarFoto(@Valid @RequestBody FotoTitularRequest request) {

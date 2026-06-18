@@ -1,6 +1,6 @@
-package com.empresa.firmatitular.exception;
+package com.contratos.API.Firmas.exception;
 
-import com.empresa.firmatitular.model.ApiResponse;
+import com.contratos.API.Firmas.model.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
