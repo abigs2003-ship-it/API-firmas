@@ -1,13 +1,10 @@
-// Modelo de validación simple para la petición de foto titular
-class FotoTitularRequest {
-    constructor({ idTitular, rutaFirma }) {
-        this.idTitular = Number(idTitular);
-        this.rutaFirma = rutaFirma;
-    }
+const Joi = require("joi");
 
-    isValid() {
-        return Number.isInteger(this.idTitular) && this.idTitular > 0 && typeof this.rutaFirma === 'string' && this.rutaFirma.length > 0;
-    }
-}
-
-module.exports = FotoTitularRequest;
+module.exports = Joi.object({
+    idTitular: Joi.number().integer().required(),
+    nombreCompleto: Joi.string().required(),
+    imagenBase64: Joi.string().required(),
+    extension: Joi.string()
+        .valid("jpg", "jpeg", "png")
+        .default("png")
+});
